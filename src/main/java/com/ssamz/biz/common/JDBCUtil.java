@@ -3,6 +3,7 @@ package com.ssamz.biz.common;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 //static메소드로 구현하면 객체 생성 없이 바로 호출이 가능.
@@ -41,4 +42,28 @@ public class JDBCUtil {
 			e.printStackTrace();
 		}
 	}
+	
+	//Overloading	-	SELECT에서 사용하는 ResultSet까지 close()
+	public static void close(ResultSet rs, PreparedStatement stmt, Connection conn) {
+		//JDBC 5단계 : 연결 해제
+		try {
+			rs.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			stmt.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			conn.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 }
