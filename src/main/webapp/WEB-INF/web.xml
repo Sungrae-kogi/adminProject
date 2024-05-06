@@ -5,7 +5,16 @@
     <welcome-file>login.html</welcome-file>
   </welcome-file-list>
   <servlet>
-    
+    <servlet-name>loginProcess</servlet-name>
+    <servlet-class>com.ssamz.web.user.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>loginProcess</servlet-name>
+    <url-pattern>/loginProcess</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>insertUser</display-name>
     <servlet-name>insertUser</servlet-name>
     <servlet-class>com.ssamz.web.user.InsertUserServlet</servlet-class>
   </servlet>
