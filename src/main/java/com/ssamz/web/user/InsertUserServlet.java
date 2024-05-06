@@ -8,38 +8,25 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class InsertUserServlet
  */
-@WebServlet("/login.do")
-public class LoginServlet extends HttpServlet {
+public class InsertUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public InsertUserServlet() {
         super();
         // TODO Auto-generated constructor stub
-        System.out.println("===> LoginServlet 생성");
     }
 
-    public void init() throws ServletException {
-    	System.out.println("---> init() 호출");
-    }
-    
-    //HttpServletRequest 객체는 내부 메소드를사용하여 사용자가 입력한 정보를 추출할 수 있다.
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-    	System.out.println("---> service() 호출");
-    } 
-
-    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		System.out.println("---> GET 방식의 요청 처리");
 	}
 
 	/**
@@ -47,11 +34,23 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("---> POST 방식의 요청 처리");
-	}
-	
-	public void destroy() {
-		System.out.println("---> destroy() 호출");
+		doGet(request, response);
+		
+		//1. 사용자 입력 정보 추출
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
+		String name = request.getParameter("name");
+		String role = request.getParameter("role");
+		String selfInfo = request.getParameter("selfInfo");
+		String[] languages = request.getParameterValues("languages");
+		String age = request.getParameter("age");
+		System.out.println("아이디 : "+id);
+		System.out.println("비밀번호 : "+password);
+		System.out.println("이름 : "+name);
+		System.out.println("권한 : "+role);
+		System.out.println("자기 소개 : "+selfInfo);
+		System.out.println("언어 경험 : "+languages);
+		System.out.println("나이 : "+age);
 	}
 
 }
