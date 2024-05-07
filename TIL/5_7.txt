@@ -1,0 +1,41 @@
+1. SQL NVL 함수
+데이터 산술, 비교 연산 처리시 NULL 값이 포함되면 연산이 예상대로 동작하지 않는다, 따라서 데이터가 NULL일 경우 값을 임의의 다른 값으로 처리해서 우회하는 방식이 
+필요할 때가 있고 이때 NVL 함수를 사용
+NVL(data, data가 null일 경우 대체값) 형식
+ex) scott계정의 EMP table에서 SAL + COMM 컬럼은 comm이 null인 case부분은 출력이 되지않음 but, NVL(COMM, '0')+SAL 컬럼으로 작성하면 임시로 NULL값을 0으로 하여 사용 가능
+
+2. NVL2 함수
+NVL은 null일 경우 대체값을 출력하지만 NVL2는 null이 아닐 경우에도 출력값 대체가 가능
+
+NVL2 ( 대상데이터 , NULL아닐때 데이터 , NULL일때 데이터) 형식
+ex) NVL2(COMM, COMM, '0') 으로 
+
+
+3. table column의 datatype 확인방법
+>sqlplus cmd에 desc table명 -> 이름	널?	유형 순으로 출력해줌
+
+4. DECODE함수
+DECODE(data, X, A, Y, B) -> data가 X이면 A출력, Y이면 B출력
+DECODE(data, X, A, B) 	-> data가 X이면 A출력, X가 아니라면 B출력
+DECODE(data, X, A, Y, B, C) -> data가 X이면 A출력, Y이면 B출력, X도 Y도아니라면 C출력
+
+
+5. CASE문
+DECODE와 유사하게 특정 조건에 따라 반환 데이터를 설정할 때 사용, 기준 데이터를 명시하고 그 값에 따라 반환 데이터를 정하는 DECODE와 다르게
+CASE문은 각 조건에 사용하는 데이터가 서로 상관없어도 가능.
+형식
+CASE 검사대상이 될 열 또는 데이터
+	WHEN [조건1] THEN [조건1이 true일시 반환값]
+	...
+	ELSE [위 조건1~n과 일치하는게 없을경우 반환]
+END
+
+DECODE와 달리 검사대상이 될 기준 데이터가 존재하지 않더라도 값이 같은 조건 이외의 조건도 사용가능.
+
+
+
+추가사항)
+sqlplus 에서 '||' 연산자의 역할 
+>문자열을 연결할 때 사용한다, 두 개의 문자열을 결합하여 새로운 문자열을 만들 때 
+ex)CASE 문에서 WHEN COMM > 0 THEN '수당 : ' || COMM
+-> COMM >0인 경우 '수당 : COMM'값이 출력된다.

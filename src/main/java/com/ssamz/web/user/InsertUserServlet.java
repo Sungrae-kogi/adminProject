@@ -1,6 +1,9 @@
 package com.ssamz.web.user;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,12 +19,29 @@ import com.ssamz.biz.user.UserVO;
 public class InsertUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
+		super.init(config);
+		System.out.println("init() method started");
+	}
+
+	@Override
+	public void service(ServletRequest arg0, ServletResponse arg1) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.service(arg0, arg1);
+		System.out.println("service() method started");
+	}
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//1. 사용자 입력 정보 추출
+		//HttpServletRequest 객체에 사용자에서 입력한 정보들이 헤더, body, 쿠키 등에 포함
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		String name = request.getParameter("name");
@@ -56,6 +76,16 @@ public class InsertUserServlet extends HttpServlet {
 		}
 		System.out.println();
 		System.out.println("나이 : " + age);
+	}
+
+	
+
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		super.destroy();
+		System.out.println("Tomcat 종료 Servlet을 destory합니다.");
 	}
 
 }
