@@ -4,6 +4,10 @@
   <welcome-file-list>
     <welcome-file>login.html</welcome-file>
   </welcome-file-list>
+  <context-param>
+	<param-name>boardEncoding</param-name>
+	<param-value>UTF-8</param-value>
+  </context-param>
   <servlet>
     <servlet-name>loginProcess</servlet-name>
     <servlet-class>com.ssamz.web.user.LoginServlet</servlet-class>
@@ -17,6 +21,10 @@
     <display-name>insertUser</display-name>
     <servlet-name>insertUser</servlet-name>
     <servlet-class>com.ssamz.web.user.InsertUserServlet</servlet-class>
+    <init-param>
+	<param-name>boardEncoding</param-name>
+	<param-value>UTF-8</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>insertUser</servlet-name>

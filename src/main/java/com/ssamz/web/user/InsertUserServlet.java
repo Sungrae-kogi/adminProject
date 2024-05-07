@@ -1,6 +1,7 @@
 package com.ssamz.web.user;
 
 import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
@@ -18,13 +19,15 @@ import com.ssamz.biz.user.UserVO;
  */
 public class InsertUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private String encoding;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(config);
+		encoding = config.getInitParameter("boardEncoding");
 		System.out.println("init() method started");
+		System.out.println("---> Encoding : " + encoding);
 	}
 
 	@Override
@@ -42,6 +45,12 @@ public class InsertUserServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//1. 사용자 입력 정보 추출
 		//HttpServletRequest 객체에 사용자에서 입력한 정보들이 헤더, body, 쿠키 등에 포함
+		
+		ServletContext context = getServletContext();
+		encoding = context.getInitParameter("boardEncoding");
+		System.out.println("---> Encoding : "+encoding);
+		request.setCharacterEncoding(encoding);
+		
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		String name = request.getParameter("name");
