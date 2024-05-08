@@ -5,8 +5,8 @@
     <welcome-file>login.html</welcome-file>
   </welcome-file-list>
   <context-param>
-	<param-name>boardEncoding</param-name>
-	<param-value>UTF-8</param-value>
+    <param-name>boardEncoding</param-name>
+    <param-value>UTF-8</param-value>
   </context-param>
   <servlet>
     <servlet-name>loginProcess</servlet-name>
@@ -22,12 +22,22 @@
     <servlet-name>insertUser</servlet-name>
     <servlet-class>com.ssamz.web.user.InsertUserServlet</servlet-class>
     <init-param>
-	<param-name>boardEncoding</param-name>
-	<param-value>UTF-8</param-value>
+      <param-name>boardEncoding</param-name>
+      <param-value>UTF-8</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>insertUser</servlet-name>
     <url-pattern>/insertUser.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetBoardListServlet</display-name>
+    <servlet-name>GetBoardListServlet</servlet-name>
+    <servlet-class>com.ssamz.biz.board.GetBoardListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetBoardListServlet</servlet-name>
+    <url-pattern>/GetBoardListServlet</url-pattern>
   </servlet-mapping>
 </web-app>
