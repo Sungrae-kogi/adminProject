@@ -40,4 +40,44 @@
     <servlet-name>GetBoardListServlet</servlet-name>
     <url-pattern>/GetBoardListServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>InsertBoardServlet</display-name>
+    <servlet-name>InsertBoardServlet</servlet-name>
+    <servlet-class>com.ssamz.biz.board.InsertBoardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InsertBoardServlet</servlet-name>
+    <url-pattern>/InsertBoardServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetBoardServlet</display-name>
+    <servlet-name>GetBoardServlet</servlet-name>
+    <servlet-class>com.ssamz.biz.board.GetBoardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetBoardServlet</servlet-name>
+    <url-pattern>/GetBoardServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateBoardServlet</display-name>
+    <servlet-name>UpdateBoardServlet</servlet-name>
+    <servlet-class>com.ssamz.biz.board.UpdateBoardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateBoardServlet</servlet-name>
+    <url-pattern>/UpdateBoardServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteBoardServlet</display-name>
+    <servlet-name>DeleteBoardServlet</servlet-name>
+    <servlet-class>com.ssamz.biz.board.DeleteBoardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteBoardServlet</servlet-name>
+    <url-pattern>/DeleteBoardServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

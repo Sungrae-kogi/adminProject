@@ -1,5 +1,6 @@
 package com.ssamz.web.user;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -55,6 +56,10 @@ public class LoginServlet extends HttpServlet {
     	//메시지 출력
     	if(user != null) {
     		if(user.getPassword().equals(password)) {
+    			//글 목록 화면으로 포워딩한다.
+    			RequestDispatcher dispatcher = request.getRequestDispatcher("getBoardList.do");
+    			dispatcher.forward(request, response);
+    			
     			out.println(user.getName() + "님 로그인 환영!<br>");
     			out.println("<a href='/getBoardList.do'>글 목록 이동</a>");
     		}else {
