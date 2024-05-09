@@ -1,5 +1,6 @@
 package com.ssamz.web.user;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -71,7 +72,8 @@ public class InsertUserServlet extends HttpServlet {
 		
 		//3. 화면 이동
 		//sendRedirect(String redirectPage) 메소드는 응답받은 브라우저가 다시 한번 redirectPage로 지정한 요청('login.html')을 서버에 전달하도록 한다.
-		response.sendRedirect("login.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/login.html");
+		dispatcher.forward(request, response);
 		
 		
 		System.out.println("아이디 : " + id);

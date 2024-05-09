@@ -2,9 +2,12 @@ package com.ssamz.biz.board;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -28,6 +31,15 @@ public class GetBoardListServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.service(request, response);
+		
+		//0. 상태 정보 체크 
+		HttpSession session = request.getSession();
+		String userId = (String) session.getAttribute("userId");
+		
+		if(userId == null) {
+			response.sendRedirect("/");
+		}
+		
 		
 		//1. DB 연동 처리
 		BoardVO vo = new BoardVO();

@@ -3,6 +3,7 @@ package com.ssamz.web.user;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,7 +43,7 @@ public class LoginServlet extends HttpServlet {
     	
     	//2. DB 연동 처리
     	UserVO vo = new UserVO();
-    	vo.setId(id);	//사용자가 전달하고 request에 담긴 id값을 생성한 vo 객체에 할당
+    	vo.setId(id);	//사용자가 전달하고 request에 담긴 id값을 생성한 vo 객체에 할당 primary-key
     	
     	UserDAO dao = new UserDAO();
     	UserVO user = dao.getUser(vo);	//찾고자 하는 id값이 담긴 vo객체를 dao의 특정 유저를 검색하는 메소드 getUser에 인자로 전달. 그 결과값을 user 에 할당
@@ -56,6 +57,10 @@ public class LoginServlet extends HttpServlet {
     	//메시지 출력
     	if(user != null) {
     		if(user.getPassword().equals(password)) {
+    			//상태 정보를 쿠키에 저장하여 전송.
+    			Cookie userId = new Cookie("userId", user.getId());
+    			response.addCookie(userId);
+    			
     			//글 목록 화면으로 포워딩한다.
     			RequestDispatcher dispatcher = request.getRequestDispatcher("getBoardList.do");
     			dispatcher.forward(request, response);

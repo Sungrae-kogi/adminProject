@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +19,21 @@ public class GetBoardServlet extends HttpServlet {
        
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//0. 상태 정보 체크
+		Cookie[] cookieList = request.getCookies();
+		if(cookieList == null) {
+			response.sendRedirect("/login.html");
+		}else {
+			String userId = null;
+			for(Cookie cookie : cookieList) {
+				if(cookie.getName().equals("userId")) {
+					userId = cookie.getValue();
+				}
+			}
+			if(userId == null) {
+				response.sendRedirect("/login.html");
+			}
+		}
 		
 		//1. 사용자 입력 정보 추출
 		String seq = request.getParameter("seq");

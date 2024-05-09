@@ -1,5 +1,6 @@
 package com.ssamz.biz.board;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -47,7 +48,8 @@ public class InsertBoardServlet extends HttpServlet {
 		boardDAO.insertBoard(vo);
 		
 		//3. 화면 이동
-		response.sendRedirect("getBoardList.do");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/getBoardList.do");
+		dispatcher.forward(request, response);
 	}
 
 }
