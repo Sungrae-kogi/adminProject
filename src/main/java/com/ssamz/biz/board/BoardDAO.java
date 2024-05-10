@@ -22,6 +22,11 @@ public class BoardDAO {
 	private static String BOARD_GET = "SELECT * FROM BOARD WHERE seq=?";
 	private static String BOARD_LIST = "SELECT * FROM BOARD ORDER BY seq desc";
 	
+	//검색 관련 쿼리
+	private static String BOARD_LIST_T = "SELECT * FROM BOARD WHERE TITLE LIKE '%'||?||'%' ORDER BY SEQ DESC";
+	private static String BOARD_LIST_C = "SELECT * FROM BOARD WHERE CONTENT LIKE '%'||?||'%' ORDER BY SEQ DESC";
+	
+	
 	//CRUD 기능 메소드
 	//글 등록
 	public void insertBoard(BoardVO vo) {
@@ -101,7 +106,12 @@ public class BoardDAO {
 		List<BoardVO> boardList = new ArrayList<BoardVO>();
 		try {
 			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(BOARD_LIST);
+			if(vo.getSearchCondition().equals("TITLE")) {
+				stmt = conn.prepareStatement(BOARD_LIST_T);
+			}else if(vo.getSearchCondition().equals("CONTENT")) {
+				stmt = conn.prepareStatement(BOARD_LIST_C);
+			}
+			stmt.setString(1, vo.getSearchKeyword());
 			rs = stmt.executeQuery();
 			//rs.next()로 행을 찾는대로 데이터들을 할당해서 List에 add
 			while(rs.next()) {

@@ -7,6 +7,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -23,15 +25,15 @@ public class LoginServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-        System.out.println("===> LoginServlet 생성");
-    }
-
-    public void init() throws ServletException {
-    	System.out.println("---> init() 호출");
-    }
+//    public LoginServlet() {
+//        super();
+//        // TODO Auto-generated constructor stub
+//        System.out.println("===> LoginServlet 생성");
+//    }
+//
+//    public void init() throws ServletException {
+//    	System.out.println("---> init() 호출");
+//    }
     
     //HttpServletRequest 객체는 내부 메소드를사용하여 사용자가 입력한 정보를 추출할 수 있다.
     //사용자가 입력한 정보 뿐 아니라 브라우저 및 요청과 관련한 모든 정보를 얻을 수 있고, 서블릿에서는 이 정보를 이용하여 사용자가 요청한 작업을 처리할 수 있다.
@@ -57,23 +59,28 @@ public class LoginServlet extends HttpServlet {
     	//메시지 출력
     	if(user != null) {
     		if(user.getPassword().equals(password)) {
-    			//상태 정보를 쿠키에 저장하여 전송.
-    			Cookie userId = new Cookie("userId", user.getId());
-    			response.addCookie(userId);
+    			//상태 정보를 세션에 저장.
+    			HttpSession session = request.getSession();
+    			session.setAttribute("userId", user.getId()); 		//Element.setAttribute(name,value)  name : 속성의 이름, value : 속성에 할당할 값
+    			session.setAttribute("userName", user.getName());
+    			session.setAttribute("userRole", user.getRole());
     			
     			//글 목록 화면으로 포워딩한다.
     			RequestDispatcher dispatcher = request.getRequestDispatcher("getBoardList.do");
     			dispatcher.forward(request, response);
     			
-    			out.println(user.getName() + "님 로그인 환영!<br>");
-    			out.println("<a href='/getBoardList.do'>글 목록 이동</a>");
+//    			//상태 정보를 쿠키에 저장하여 전송.
+//    			Cookie userId = new Cookie("userId", user.getId());
+//    			response.addCookie(userId);
+    			
+    			
     		}else {
     			out.println("비밀번호 오류입니다. <br>");
-    			out.println("<a href='/'>다시 로그인</a>");
+    			out.println("<a href='/login.html'>다시 로그인</a>");
     		}
     	}else {
     		out.println("아이디 오류입니다. <br>");
-    		out.println("<a href='/'>다시 로그인</a>");
+    		out.println("<a href='/login.html'>다시 로그인</a>");
     	}
     	
     	

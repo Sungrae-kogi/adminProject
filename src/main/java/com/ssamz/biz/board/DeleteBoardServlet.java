@@ -7,6 +7,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 /**
@@ -21,21 +23,28 @@ public class DeleteBoardServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//0. 상태 정보 체크
-		Cookie[] cookieList = request.getCookies();
-		if(cookieList == null) {
+		HttpSession session = request.getSession();
+		String userId = (String) session.getAttribute("userId");
+		if(userId == null) {
 			response.sendRedirect("/login.html");
-		}else {
-			String userId = null;
-			
-			for(Cookie cookie : cookieList) {
-				if(cookie.getName().equals("userId")) {
-					userId = cookie.getValue();
-				}
-			}
-			if(userId ==null) {
-				response.sendRedirect("/login.html");
-			}
 		}
+		
+		
+//		Cookie[] cookieList = request.getCookies();
+//		if(cookieList == null) {
+//			response.sendRedirect("/login.html");
+//		}else {
+//			String userId = null;
+//			
+//			for(Cookie cookie : cookieList) {
+//				if(cookie.getName().equals("userId")) {
+//					userId = cookie.getValue();
+//				}
+//			}
+//			if(userId ==null) {
+//				response.sendRedirect("/login.html");
+//			}
+//		}
 		
 		
 		//1. 사용자 입력 정보 추출
